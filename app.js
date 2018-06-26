@@ -1,6 +1,6 @@
-const path = require("path");
 const port = (process.env.PORT || 8081)
-const app = Server.app();
+const path = require("path");
+const app = require('./server/index.js').app()
 const reactHelmet = require("react-helmet");
 
 if (process.env.NODE_ENV !== 'production') {
@@ -20,6 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.get("/*", function (req, res) {
   //res.sendFile("index.html", {root: path.join(__dirname, "./public") })
+
   const helmet = reactHelmet.Helmet.renderStatic();
   const html = `
       <!doctype html>
@@ -35,6 +36,7 @@ app.get("/*", function (req, res) {
           </body>
       </html>
   `;
+
   res.send(html)
 });
 

@@ -13,23 +13,19 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.js$/,
+      { test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'client'),
         exclude: /node_modules/,
-        loader: "babel-loader"
+        loader: "babel-loader",
+        options: {presets: ['env']}
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.(png|svg|jpg|gif|pdf)$/,
-        use: [
-          'file-loader'
-        ]
+        use: ['file-loader']
       }
     ]
   },
@@ -43,6 +39,6 @@ module.exports = {
   },
 	plugins: [
 		 new CleanWebpackPlugin(['dist']),
-     new HtmlWebpackPlugin()
+     //new HtmlWebpackPlugin()
   ]
 };
