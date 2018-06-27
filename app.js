@@ -1,7 +1,6 @@
 const port = (process.env.PORT || 8081)
 const path = require("path");
 const app = require('./server/index.js').app()
-const reactHelmet = require("react-helmet");
 
 if (process.env.NODE_ENV !== 'production') {
 	//webpack
@@ -21,16 +20,12 @@ if (process.env.NODE_ENV !== 'production') {
 app.get("/*", function (req, res) {
   //res.sendFile("index.html", {root: path.join(__dirname, "./public") })
 
-  const helmet = reactHelmet.Helmet.renderStatic();
   const html = `
       <!doctype html>
-      <html ${helmet.htmlAttributes.toString()}>
+      <html>
           <head>
-              ${helmet.title.toString()}
-              ${helmet.meta.toString()}
-              ${helmet.link.toString()}
           </head>
-          <body ${helmet.bodyAttributes.toString()}>
+          <body>
             <div id="root"></div>
             <script src="./app.bundle.js"></script>
           </body>

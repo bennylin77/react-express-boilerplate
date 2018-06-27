@@ -1,15 +1,18 @@
-import React, { Component} from "react";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import { store, history } from './store.js';
 import { hot } from 'react-hot-loader'
-import "./App.css";
+import Layout from 'components/layouts/Layout.js';
 
-class App extends Component{
-  render(){
-    return(
-      <div className="App">
-        <h1> Hello, World!</h1>
-      </div>
-    );
-  }
-}
 
-export default hot(module)(App);
+const App = () => (
+  <Provider store={store} >
+    <ConnectedRouter history={history}>
+      <Layout/>
+    </ConnectedRouter>
+  </Provider>
+)
+
+
+export default hot(module)(App)

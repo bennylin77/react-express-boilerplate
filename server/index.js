@@ -3,12 +3,10 @@ const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser')
 const path = require("path");
 const favicon = require('serve-favicon');
-//const db = require('./config/db');
+const db = require('./config/db');
 //controllers
+const videoController = require("./controllers/videoController");
 
-//const articleController = require("./controllers/articleController");
-//const projectController = require("./controllers/projectController");
-//const mediaController = require("./controllers/mediaController");
 
 module.exports = {
   app: function () {
@@ -19,9 +17,7 @@ module.exports = {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     app.use(cookieParser());
-    //app.use("/api/articles", articleController);
-    //app.use("/api/projects", projectController);
-    //app.use("/api/media", mediaController);
+    app.use("/api/video", videoController);
     return app;
   }
 }
