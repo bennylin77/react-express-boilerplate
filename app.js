@@ -27,7 +27,7 @@ app.get("/*", function (req, res) {
           </head>
           <body>
             <div id="root"></div>
-            <script src="./app.bundle.js"></script>
+            <script src="/app.bundle.js"></script>
           </body>
       </html>
   `;

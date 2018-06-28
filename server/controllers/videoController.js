@@ -4,6 +4,7 @@ const router = require("express").Router();
 
 const all = (req, res) => {
   Video.find( {}, 'id').sort({createdAt: -1}).exec(function (err, videos) {
+			console.log("checked")
       if (err)
           res.send(err);
       else

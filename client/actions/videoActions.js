@@ -1,12 +1,42 @@
-
+const port = process.env.PORT
+const domain = process.env.DOMAIN
+const host = process.env.NODE_ENV == 'production'? `${domain}` : `${domain}:${port}`
 export const REQUEST_VIDEO_LIST = 'REQUEST_VIDEO_LIST'
 export const RECEIVE_VIDEO_LIST = 'RECEIVE_VIDEO_LIST'
-export const REQUEST_VIDEO = 'REQUEST_VIDEO'
-export const RECEIVE_VIDEO = 'RECEIVE_VIDEO'
-export const EDIT_VIDEO = 'EDIT_VIDEO'
-export const UPDATE_VIDEO = 'UPDATE_VIDEO'
 
 
+
+export function fetchVideoList(){
+  return (dispatch, getState) => {
+    dispatch( requestVideoList() )
+    return fetch(`${host}/api/video/all`)
+      .then(response => response.json())
+      .then(result => dispatch(receiveVideoList(result)))
+      //.then( () => {
+      //  getState().articlesByArticle[tag].items.forEach(function(id) {
+      //    if (shouldFetchArticle(getState(), id))
+      //      dispatch(fetchArticle(id))
+      //  });
+      //})
+  }
+}
+function requestVideoList() {
+  return {
+    type: REQUEST_VIDEO_LIST,
+    tag: 'videoList'
+  }
+}
+function receiveVideoList(result) {
+    return {
+      type: RECEIVE_VIDEO_LIST,
+      tag: 'videoList',
+      items: result.map( video => video.id ),
+      receivedAt: Date.now()
+    }
+}
+
+
+/*
 export function fetchVideo(id){
 	return (dispatch, getState) => {
     dispatch(requestVideo(id))
@@ -36,7 +66,7 @@ const receive2DVideo = (id, data) => {
       id
     }
 }
-
+*/
 
 
 

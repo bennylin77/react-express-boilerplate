@@ -25,7 +25,7 @@ class Menu extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link to="/" className="nav-link">Home</Link>
+                <Link to="/video/all" className="nav-link">Videos</Link>
               </NavItem>
             </Nav>
           </Collapse>
