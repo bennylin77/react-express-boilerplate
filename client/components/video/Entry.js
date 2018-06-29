@@ -1,5 +1,5 @@
 import React from 'react';
-import All from 'containers/video/All.js';
+import All from 'components/video/All.js';
 import { Route } from 'react-router-dom'
 
 function Entry(props) {

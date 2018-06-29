@@ -5,11 +5,24 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 class List extends Component {
 	constructor(props){
 		super(props)
+		this.isNotFetched = this.isNotFetched.bind(this);
 	}
-	render() {
-		const { videos } = this.props;
-		const items = videos.map((v) => <ListGroupItem key={v}>{v}</ListGroupItem>);
+	componentDidMount() {
+		const { fetchVideoList } = this.props;
+		fetchVideoList()
+	}
+	isNotFetched() {
+		const { videoList } = this.props
+		return !videoList || !videoList.items;
+	}
 
+
+	render() {
+		const { videoList } = this.props
+    if (this.isNotFetched()) {
+      return <h4><i>Loading</i></h4>
+    }
+		const items = videoList.items.map((v) => <ListGroupItem key={v}>{v}</ListGroupItem>);
 		return (
 			<ListGroup>{items}</ListGroup>
 		);

@@ -6,7 +6,7 @@ const common = require('./webpack.common.js');
 
 module.exports = merge({
 	mode: 'development',
-	devtool: 'inline-source-map',
+	devtool: 'eval',
   entry: {
     app: ['webpack-hot-middleware/client']
   },
