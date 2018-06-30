@@ -17,7 +17,8 @@ module.exports = {
         include: path.join(__dirname, 'client'),
         exclude: /node_modules/,
         loader: "babel-loader",
-        options: {presets: ['env']}
+				options: { presets: ['env', "react"],
+									 plugins: ["transform-object-rest-spread", "transform-class-properties"] }
       },
       {
         test: /\.css$/,
