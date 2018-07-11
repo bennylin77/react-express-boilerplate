@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/bennylin77/react-express-boilerplate.git"
   },
-  "author": "Benny Lin",
+  "author": "Chi Lin <bennylin77@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bennylin77/react-express-boilerplate/issues"
