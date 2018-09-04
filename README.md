@@ -43,19 +43,19 @@ JWT_SECRET=your_jwt_secret (e.g., f3du4dPoZ6GCUPauOcALPkEdEUX1eE)
 ```
 npm install -g nodemon
 ```
-2. Start development server:
+2. Start the development server:
 ```
 npm start
 ```
 
 ## Production mode
 
-1. Build the project for production:
+1. Build the project for the production:
 ```
 npm run build
 ```
-2. Modify environment variables in ./.env file which we created in the Setup step.
+2. Modify the environment variables in ./.env file which we created in the Setup step.
 
-3. Use Process Management (e.g., [PM2](https://pm2.io/doc/en/runtime/overview/?utm_source=pm2&utm_medium=website&utm_campaign=rebranding)) to make your application alive forever.
+3. Use a process management (e.g., [PM2](https://pm2.io/doc/en/runtime/overview/?utm_source=pm2&utm_medium=website&utm_campaign=rebranding)) to make your application alive forever.
 
 
