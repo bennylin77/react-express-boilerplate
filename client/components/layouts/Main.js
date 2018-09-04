@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import Home from  'components/home/Home.js';
-import Video from 'components/video/Entry.js';
 import { Route } from 'react-router-dom'
+import Home from  'components/home/Home';
+import Video from 'components/video/Entry';
+import Auth from  'components/auth/Entry';
+import NoRequireAuth from 'components/hocs/NoRequireAuth';
+import RequireAuth from 'components/hocs/RequireAuth';
 import './styles/Main.css';
 
 class Main extends Component {
 	render() {
 				return (
 					<main>
-
-			        <Route exact path='/' component={Home}/>
+			        <Route exact path='/' component={RequireAuth(Home)}/>
 							<Route path='/video' component={Video}/>
-			      
+							<Route path='/auth' component={NoRequireAuth(Auth)}/>
 					</main>);
 	}
 }

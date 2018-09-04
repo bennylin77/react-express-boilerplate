@@ -18,7 +18,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: "babel-loader",
 				options: { presets: ['env', "react"],
-									 plugins: ["transform-object-rest-spread", "transform-class-properties"] }
+									 plugins: ["transform-object-rest-spread", "transform-class-properties", "react-hot-loader/babel"] }
       },
       {
         test: /\.css$/,
@@ -35,11 +35,10 @@ module.exports = {
       components: path.resolve(__dirname, "client/components"),
       containers: path.resolve(__dirname, "client/containers"),
       actions: path.resolve(__dirname, "client/actions"),
-      //layout: path.resolve(__dirname, "client/components/layouts/layout.css")
     },
   },
 	plugins: [
-		 new CleanWebpackPlugin(['dist']),
+		 new CleanWebpackPlugin(['dist/*.*']),
      //new HtmlWebpackPlugin()
   ]
 };

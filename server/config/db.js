@@ -1,3 +1,3 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test_development', {
-});
+const DATABASE = process.env.DATABASE;
+mongoose.connect(`mongodb://localhost/${DATABASE}`, {});

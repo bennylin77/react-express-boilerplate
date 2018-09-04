@@ -2,8 +2,6 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
-
-
 module.exports = merge({
 	mode: 'development',
 	devtool: 'eval',
@@ -15,8 +13,7 @@ module.exports = merge({
     new webpack.DefinePlugin({
         'process.env': {
           'NODE_ENV': JSON.stringify('development'),
-          'DOMAIN': JSON.stringify('http://www.chi-lin.com'),
-          'PORT': JSON.stringify('8081')
+          'DOMAIN': JSON.stringify('https://chi-lin.com')
       }
     })
   ]

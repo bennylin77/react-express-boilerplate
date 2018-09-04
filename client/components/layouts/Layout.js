@@ -1,8 +1,8 @@
 
 import React from 'react';
-import Menu from 'components/layouts/Menu.js';
-import Main from 'components/layouts/Main.js';
-import Footer from 'components/layouts/Footer.js';
+import Menu from 'containers/layouts/MenuContainer';
+import Main from 'components/layouts/Main';
+import Footer from 'components/layouts/Footer';
 
 const Layout = props => {
   return (

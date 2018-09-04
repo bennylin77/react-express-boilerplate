@@ -1,4 +1,5 @@
 # Dependency directories
 node_modules/
-
-public/
+server/public/
+dist/*
+.env

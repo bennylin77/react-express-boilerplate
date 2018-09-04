@@ -4,20 +4,22 @@ const cookieParser = require('cookie-parser')
 const path = require("path");
 const favicon = require('serve-favicon');
 const db = require('./config/db');
+const passport = require('passport');
+require('./passport');
 //controllers
-const videoController = require("./controllers/videoController");
+const authController = require("./controllers/authController");
+const articleController = require("./controllers/articleController");
 
 
 module.exports = {
   app: function () {
     const app = express();
-
-    //app.use(favicon(path.join(__dirname,"./favicon.ico")));
-    app.use(express.static(path.join(__dirname,"../public")));
-    app.use(bodyParser.urlencoded({ extended: true }));
+		app.use(passport.initialize());
+    app.use(express.static(path.join(__dirname, "./public"))); // for serving static files (e.g. images)
     app.use(bodyParser.json());
     app.use(cookieParser());
-    app.use("/api/video", videoController);
+    //app.use("/api/articles", passport.authenticate('jwt', {session: false}), articleController);
+		app.use('/api/auth', authController);
     return app;
   }
 }
