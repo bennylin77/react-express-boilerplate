@@ -9,7 +9,7 @@ Download this boilerplate and install the dependent packages
 ```
 npm i
 ```
-Also, intall mongoDB. You can folllow the tutorial [Here] (https://docs.mongodb.com/manual/installation/)
+Also, you need to intall MongoDB. The installation tutorial for MongoDB is [Here](https://docs.mongodb.com/manual/installation/)
 
 **2. Configure files**
 
