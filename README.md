@@ -19,8 +19,8 @@ Modify the files in following paths to configure your own variables (e.g. DOMAIN
 ./webpack.dev.js
 ./webpack.prod.js
 ```
-- **./webpack.dev.js** is for development mode
-- **./webpack.prod.js** is for production mode
+- **./webpack.dev.js** is for the development mode
+- **./webpack.prod.js** is for the production mode
 
 Creat an .env file in the root of your application:
 ```
