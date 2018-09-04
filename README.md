@@ -3,11 +3,17 @@ React &amp; redux + webpack + express boilerplate
 
 ## Setup
 
-**1. install**
+**1. Install**
 
+Download this boilerplate and install the dependent packages
+```
+npm i
+```
+Also, intall mongoDB. You can folllow the tutorial [Here] (https://docs.mongodb.com/manual/installation/)
 
+**2. Configure files**
 
-Modify the files in following paths to configure your variables (e.g. DOMAIN, PORT and DATABASE ).
+Modify the files in following paths to configure your variables (e.g. DOMAIN, PORT and DATABASE).
 
 ```
 ./env
@@ -18,7 +24,6 @@ Modify the files in following paths to configure your variables (e.g. DOMAIN, PO
 - **./webpack.prod.js** is for production mode
 - **./env** is for both environments so if you want to switch from development mode to production mode, make sure you modify variables in ./env
 
-**1. Configure files**
 
 ## Development mode
 
