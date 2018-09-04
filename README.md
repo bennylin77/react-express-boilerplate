@@ -3,7 +3,10 @@ React &amp; redux + webpack + express boilerplate
 
 ## Setup
 
-1. First list item
+**1. install**
+
+
+
 Modify the files in following paths to configure your variables (e.g. DOMAIN, PORT and DATABASE ).
 
 ```
@@ -15,7 +18,7 @@ Modify the files in following paths to configure your variables (e.g. DOMAIN, PO
 - **./webpack.prod.js** is for production mode
 - **./env** is for both environments so if you want to switch from development mode to production mode, make sure you modify variables in ./env
 
-
+**1. Configure files**
 
 ## Development mode
 
