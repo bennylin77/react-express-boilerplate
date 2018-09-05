@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import "./styles/Auth.css";
+import { Link } from 'react-router-dom'
 import { Field } from 'redux-form';
 import { FaFacebookF, FaEnvelope, FaLock } from "react-icons/fa";
 import { Card, CardBody, CardTitle, Form, FormGroup, Button,
@@ -27,13 +28,13 @@ class SignInForm extends Component {
 	render() {
 		const { handleSubmit } = this.props;
 		return (
-			<Card className="">
-				<CardBody className="mx-auto" style={{maxWidth: "600px"}}>
-					<CardTitle className="mt-3">Sign In</CardTitle>
+			<Card className="auth-card">
+				<CardBody className="auth-card-body">
+					<h2 className="my-3 text-center">Sign In</h2>
 					<p>
 						<a href="" className="btn btn-block btn-facebook btn-social d-flex align-items-center justify-content-center"> <FaFacebookF style={{paddingRight: 5}} /> Sign in via facebook </a>
 					</p>
-					<p class="divider-text">
+					<p className="divider-text">
 				    <span style={{background: "#ffffff"}}>OR</span>
 				  </p>
 					<Form onSubmit={handleSubmit(this.submit)}>
@@ -62,7 +63,7 @@ class SignInForm extends Component {
 					  <FormGroup>
 					    <Button color="primary" block> Sign In </Button>
 					  </FormGroup>
-					  <p className="text-center">Don't have an account? <a href="">Sign Up</a></p>
+					  <p className="text-center">Don't have an account? <Link to="/auth/signup">Sign Up</Link></p>
 					</Form>
 					{this.errorMessage()}
 			</CardBody>

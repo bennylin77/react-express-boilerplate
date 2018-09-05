@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import "./styles/Auth.css";
+import { Link } from 'react-router-dom'
 import { Field } from 'redux-form';
+import { FaFacebookF, FaEnvelope, FaLock } from "react-icons/fa";
+import { Card, CardBody, CardTitle, Form, FormGroup, Button,
+				 Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 
 
-class SignInForm extends Component {
+class SignUpForm extends Component {
 	constructor(props){
 		super(props)
 	}
 	submit = (values) => {
-    this.props.signIn(values, this.props.history);
+    this.props.signUp(values, this.props.history);
   }
 
 	errorMessage = () => {
@@ -24,80 +29,59 @@ class SignInForm extends Component {
 	render() {
 		const { handleSubmit } = this.props;
 		return (
-
-
-			<div class="card bg-light">
-			<article class="card-body mx-auto" style="max-width: 400px;">
-				<h4 class="card-title mt-3 text-center">Create Account</h4>
-				<p class="text-center">Get started with your free account</p>
-				<p>
-					<a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
-					<a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
-				</p>
-				<p class="divider-text">
-			        <span class="bg-light">OR</span>
-			    </p>
-				<form>
-				<div class="form-group input-group">
-					<div class="input-group-prepend">
-					    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-					 </div>
-			        <input name="" class="form-control" placeholder="Full name" type="text" />
-			    </div>
-			    <div class="form-group input-group">
-			    	<div class="input-group-prepend">
-					    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-					 </div>
-			        <input name="" class="form-control" placeholder="Email address" type="email" />
-			    </div>
-			    <div class="form-group input-group">
-			    	<div class="input-group-prepend">
-					    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-					</div>
-					<select class="custom-select" style="max-width: 120px;">
-					    <option selected="">+971</option>
-					    <option value="1">+972</option>
-					    <option value="2">+198</option>
-					    <option value="3">+701</option>
-					</select>
-			    	<input name="" class="form-control" placeholder="Phone number" type="text" />
-			    </div>
-			    <div class="form-group input-group">
-			    	<div class="input-group-prepend">
-					    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
-					</div>
-					<select class="form-control">
-						<option selected=""> Select job type</option>
-						<option>Designer</option>
-						<option>Manager</option>
-						<option>Accaunting</option>
-					</select>
-				</div>
-			    <div class="form-group input-group">
-			    	<div class="input-group-prepend">
-					    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-					</div>
-			        <input class="form-control" placeholder="Create password" type="password" />
-			    </div>
-			    <div class="form-group input-group">
-			    	<div class="input-group-prepend">
-					    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-					</div>
-			        <input class="form-control" placeholder="Repeat password" type="password" />
-			    </div>
-			    <div class="form-group">
-			        <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
-			    </div>
-			    <p class="text-center">Have an account? <a href="">Log In</a> </p>
-			</form>
-			</article>
-			</div>
-
-
-
-
+			<Card className="auth-card">
+				<CardBody className="auth-card-body">
+					<h2 className="my-3 text-center">Sign Up</h2>
+					<p>
+						<a href="" className="btn btn-block btn-facebook btn-social d-flex align-items-center justify-content-center"> <FaFacebookF style={{paddingRight: 5}} /> Sign up via facebook </a>
+					</p>
+					<p className="divider-text">
+						<span style={{background: "#ffffff"}}>OR</span>
+					</p>
+					<Form onSubmit={handleSubmit(this.submit)}>
+						<InputGroup className="form-group">
+							<InputGroupAddon addonType="prepend">
+								<InputGroupText><FaEnvelope/></InputGroupText>
+							</InputGroupAddon>
+							<Field className="form-control"
+										 name="email"
+										 component="input"
+										 type="text"
+										 placeholder="Email"
+							/>
+						</InputGroup>
+						<InputGroup className="form-group">
+							<InputGroupAddon addonType="prepend">
+								<InputGroupText><FaLock/></InputGroupText>
+							</InputGroupAddon>
+							<Field className="form-control"
+										 name="password"
+										 component="input"
+										 type="password"
+										 placeholder="Password"
+							/>
+						</InputGroup>
+						<InputGroup className="form-group">
+							<InputGroupAddon addonType="prepend">
+								<InputGroupText><FaLock/></InputGroupText>
+							</InputGroupAddon>
+							<Field className="form-control"
+										 name="confirmPassword"
+										 component="input"
+										 type="password"
+										 placeholder="Confirm Password"
+							/>
+						</InputGroup>
+						<FormGroup>
+							<Button color="primary" block> Sign Up </Button>
+						</FormGroup>
+						<p className="text-center">Have an account? <Link to="/auth/signin">Sign In</Link></p>
+					</Form>
+					{this.errorMessage()}
+			</CardBody>
+		</Card>
 		);
 	}
 }
 
-export default SignInForm;
+export default SignUpForm;

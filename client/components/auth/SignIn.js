@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import "./styles/Auth.css";
 import SignInForm from 'containers/auth/SignInFormContainer';
 
 
@@ -10,7 +9,7 @@ class SignIn extends Component {
 	}
 	render() {
 		return (
-			<div>
+			<div className="d-flex justify-content-center pt-5">
 				<SignInForm />
 			</div>
 		);

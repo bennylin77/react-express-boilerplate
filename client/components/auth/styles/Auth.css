@@ -1,3 +1,9 @@
+.auth-card{
+	width: 500px;
+}
+.auth-card-body{
+	padding: 1.75rem;
+}
 .divider-text {
     position: relative;
     text-align: center;
@@ -24,6 +30,10 @@
     color: #fff;
 }
 .btn-facebook {
-    background-color: #405D9D;
+    background-color: rgba(59,89,152, 1);
+    color: #fff;
+}
+.btn-facebook:hover {
+    background-color: rgba(59,89,152, .8);
     color: #fff;
 }

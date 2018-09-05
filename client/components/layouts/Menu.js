@@ -22,7 +22,7 @@ class Menu extends React.Component {
 		const navItem = [];
 		if(authenticated){
 				navItem.push(<NavItem key="images"><Link className="nav-link" to="/videos">Videos</Link></NavItem>)
-        navItem.push(<NavItem key="signout"><NavLink href="#" onClick={this.handleSignOutClick}>Sign out</NavLink></NavItem>)
+        navItem.push(<NavItem key="signout"><NavLink href="#" onClick={this.props.signOut}>Sign out</NavLink></NavItem>)
     }else{
 	      navItem.push(<NavItem key="signin"><Link className="nav-link" to="/auth/signin">Sign in</Link></NavItem>)
 	      navItem.push(<NavItem key="signup"><Link className="nav-link" to="/auth/signup">Sign up</Link></NavItem>)

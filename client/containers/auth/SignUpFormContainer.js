@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signIn } from 'actions/authActions';
+import { signUp } from 'actions/authActions';
 import Form from 'components/auth/SignUpForm';
 import { reduxForm } from 'redux-form';
 
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
   return { errorMessage: state.auth.error };
 }
 const mapDispatchToProps = dispatch => ({
-  signIn: (data, history) => dispatch(signIn(data, history)),
+  signUp: (data, history) => dispatch(signUp(data, history)),
 })
 
 const SignUpForm = connect(

@@ -3,16 +3,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import SignUpForm from 'containers/auth/SignUpFormContainer';
 
 
-class SignIn extends Component {
+class SignUp extends Component {
 	constructor(props){
 		super(props)
 	}
 	render() {
 		return (
-			<div>
+			<div className="d-flex justify-content-center pt-5">
 				<SignUpForm />
 			</div>
 		);
 	}
 }
-export default SignIn;
+export default SignUp;
