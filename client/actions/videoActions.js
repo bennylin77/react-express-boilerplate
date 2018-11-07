@@ -1,6 +1,6 @@
 const port = process.env.PORT
 const domain = process.env.DOMAIN
-const host = process.env.NODE_ENV == 'production'? `${domain}` : `${domain}:${port}`
+const host = domain
 export const REQUEST_VIDEO_LIST = 'REQUEST_VIDEO_LIST'
 export const RECEIVE_VIDEO_LIST = 'RECEIVE_VIDEO_LIST'
 
