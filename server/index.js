@@ -8,7 +8,6 @@ const passport = require('passport');
 require('./passport');
 //controllers
 const authController = require("./controllers/authController");
-const articleController = require("./controllers/articleController");
 
 
 module.exports = {

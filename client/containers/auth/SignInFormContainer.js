@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { signIn } from 'actions/authActions';
 import Form from 'components/auth/SignInForm';
 import { reduxForm } from 'redux-form';
+import { withRouter } from 'react-router-dom'
 
 //connect
 const mapStateToProps = (state) => {
-  return { errorMessage: state.auth.error };
+  return { };
 }
 const mapDispatchToProps = dispatch => ({
   signIn: (data, history) => dispatch(signIn(data, history)),
@@ -17,6 +18,6 @@ const SignInForm = connect(
     mapDispatchToProps
 )(Form);
 
-export default reduxForm({
+export default withRouter(reduxForm({
   form: 'signin'
-})(SignInForm);
+})(SignInForm));

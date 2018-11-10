@@ -15,16 +15,6 @@ class SignInForm extends Component {
     this.props.signIn(values, this.props.history);
   }
 
-	errorMessage = () => {
-    if (this.props.errorMessage) {
-      return (
-        <div className="info-red">
-          {this.props.errorMessage}
-        </div>
-      );
-    }
-  }
-
 	render() {
 		const { handleSubmit } = this.props;
 		return (
@@ -65,7 +55,6 @@ class SignInForm extends Component {
 					  </FormGroup>
 					  <p className="text-center">Don't have an account? <Link to="/auth/signup">Sign Up</Link></p>
 					</Form>
-					{this.errorMessage()}
 			</CardBody>
 		</Card>
 		);

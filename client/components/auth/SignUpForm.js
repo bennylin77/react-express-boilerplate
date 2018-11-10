@@ -16,16 +16,6 @@ class SignUpForm extends Component {
     this.props.signUp(values, this.props.history);
   }
 
-	errorMessage = () => {
-    if (this.props.errorMessage) {
-      return (
-        <div className="info-red">
-          {this.props.errorMessage}
-        </div>
-      );
-    }
-  }
-
 	render() {
 		const { handleSubmit } = this.props;
 		return (
@@ -77,7 +67,6 @@ class SignUpForm extends Component {
 						</FormGroup>
 						<p className="text-center">Have an account? <Link to="/auth/signin">Sign In</Link></p>
 					</Form>
-					{this.errorMessage()}
 			</CardBody>
 		</Card>
 		);

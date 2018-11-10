@@ -13,10 +13,10 @@ passport.use(new LocalStrategy({
     function (email, password, cb) {
       return User.findOne({email})
           .then(user => {
-                if (!user || !user.isValidPassword(password)) {
+                if (!user || !password || !user.isValidPassword(password)) {
                     return cb(null, false, {message: 'Incorrect email or password.'});
                 }
-                return cb(null, user, {message: 'Logged In Successfully'});
+                return cb(null, user, {message: 'Sign in successfully'});
           })
           .catch(err => {
                 return cb(err);
