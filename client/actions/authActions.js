@@ -25,7 +25,6 @@ export function signUp({ email, password, confirmPassword }, history){
 										dispatch({ type: actionTypes.AUTHENTICATED })
 								 })
 								 .then(()=>{
-
 								 		history.push(redirectPath);
 								 })
 								 .catch(response =>{

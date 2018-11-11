@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import { fetchVideoListIfNeeded } from 'actions/videoActions.js';
+import { fetchVideoListIfNeeded, addVideo } from 'actions/videoActions.js';
 import All from 'components/video/All.js';
 
 
 //connect
 const mapStateToProps =  state => {
-	const { paginations: {videoList: videoList}, history } = state
+	const { entities: { videos: videos }, paginations: {videoList: videoList} } = state
   return {
-		videoList,
-    history
+		videos,
+		videoList
   }
 }
 const mapDispatchToProps = dispatch => ({
-  fetchVideoListIfNeeded: () => dispatch(fetchVideoListIfNeeded()),
-
+  fetchVideoListIfNeeded: (page, limit) => dispatch(fetchVideoListIfNeeded(page, limit)),
+	addVideo: () => dispatch(addVideo())
 })
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(All));

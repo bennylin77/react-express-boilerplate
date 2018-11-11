@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
-import { Button } from 'reactstrap';
+import { Button, ButtonGroup } from 'reactstrap';
 
 class List extends Component {
 	constructor(props){
@@ -22,7 +23,7 @@ class List extends Component {
 
 		const items = pages[currentPage].ids.map(id =>{
 			return (<ListGroupItem key={id}>
-								<ListGroupItemHeading>{videos[id].url}</ListGroupItemHeading>
+								<ListGroupItemHeading>{id} - {videos[id].url}</ListGroupItemHeading>
 								<div>
 									<ButtonGroup>
 										<Link to={`/${url}/${id}`} className="btn btn-outline-secondary" role="button">Detail</Link>

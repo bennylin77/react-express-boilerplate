@@ -1,4 +1,5 @@
 const domain = process.env.DOMAIN;
+import { addNotification } from 'actions/notificationActions';
 export const actionTypes = {
 	REQUEST_VIDEO_LIST: 'REQUEST_VIDEO_LIST',
 	RECEIVE_VIDEO_LIST: 'RECEIVE_VIDEO_LIST',
@@ -9,9 +10,69 @@ export const actionTypes = {
 /*============================== video =================================*/
 
 
+function requestVideo(id){
+	return {
+		type: actionTypes.REQUEST_VIDEO,
+		payload: {
+			id
+		}
+	}
+}
+function receiveVideo(id, item){
+	return {
+		type: actionTypes.RECEIVE_VIDEO,
+		payload: {
+			id,
+			item
+		}
+	}
+}
+function shouldFetchVideo(state, id){
+	const item = state.entities.videos[id];
+	if (!item)
+		return true
+	else if(item.isFetching)
+		return false
+	else
+		return true
+}
+function fetchVideoIfNeeded(id){
+	return (dispatch, getState) => {
+		if (shouldFetchVideo(getState(), id))
+			return dispatch(fetchVideo(id))
+		else
+			return Promise.resolve()
+	}
+}
+function fetchVideo(id){
+	const token = localStorage.getItem('token');
+	return (dispatch, getState) => {
+		dispatch( requestVideo(id) )
+		return fetch(`${domain}/api/videos/${id}`, {headers: {authorization: `bearer ${token}`}})
+			.then(response => response.json())
+			.then(response => dispatch(receiveVideo(response.data.item.id, response.data.item)))
+	}
+}
+export function addVideo(){
+	const token = localStorage.getItem('token');
+  return (dispatch, getState) => {
+    return fetch(`${domain}/api/videos/add`, {headers: {authorization: `bearer ${token}`}})
+      .then(response => response.json())
+      .then(response => {
+				if(response.status!='success')
+					throw response;
+				Promise.all([
+					dispatch(receiveVideo(response.data.item.id, response.data.item)),
+					dispatch(addNotification({message: response.message}))
+				])
+			})
+			.catch( response => dispatch(addNotification({message: response.message})))
+  }
+}
+
 /*============================== video list =================================*/
 
-export function fetchVideoListIfNeeded(page, limit=100){
+export function fetchVideoListIfNeeded(page, limit){
 	return (dispatch, getState) => {
 		if (shouldFetchVideoList(getState(), page))
 			return dispatch(fetchVideoList(page, limit))

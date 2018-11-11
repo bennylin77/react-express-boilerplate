@@ -4,6 +4,8 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import List from './List';
 import Pagination from './Pagination';
 
+const LIMIT = 10;
+
 class All extends Component{
   constructor(props) {
      super(props);
@@ -12,7 +14,7 @@ class All extends Component{
 		const { fetchVideoListIfNeeded, location: {search: search} } = this.props;
 		const params = new URLSearchParams(search);
 		const page = params.get('page');
-		fetchVideoListIfNeeded(page || 1)
+		fetchVideoListIfNeeded(page || 1, LIMIT)
 	}
 	componentDidUpdate = (prevProps) =>{
 		const { fetchVideoListIfNeeded } = this.props;
@@ -20,12 +22,19 @@ class All extends Component{
 		const prevParams = new URLSearchParams(prevProps.location.search);
 		// Typical usage (don't forget to compare props):
 	  if (params.get('page') !== prevParams.get('page')) {
-	    fetchVideoListIfNeeded(params.get('page') || 1);
+	    fetchVideoListIfNeeded(params.get('page') || 1, LIMIT);
 	  }
 	}
 	isNotFetched = () => {
 		const { videoList, videos } = this.props
 		return !videoList || !videos;
+	}
+
+	handleAdd = () => {
+		const { addVideo } = this.props;
+		addVideo().then(
+			()=>this.props.history.push('/videos')
+		)
 	}
 
   render() {
@@ -36,7 +45,10 @@ class All extends Component{
     return (
 			<section>
 				<Container className="py-5">
-	        <Row>
+					<Row className="mb-2">
+						<Col><Button onClick={this.handleAdd} >Add New Video</Button></Col>
+					</Row>
+	        <Row className="mb-2">
 	          <Col><List url={"/videos"} videos={videos} currentPage={currentPage} pages={pages} /></Col>
 	        </Row>
 					<Row className="mb-2">

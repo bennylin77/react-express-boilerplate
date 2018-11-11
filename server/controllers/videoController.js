@@ -9,9 +9,8 @@ const all = async (req, res) => {
 	}
 	try {
 		const offset = (pageOptions.page-1)*pageOptions.limit;
-		const query = await Video.find({}).skip(offset).limit(pageOptions.limit).exec()
+		const query = await Video.find({}).sort({createdAt: -1}).skip(offset).limit(pageOptions.limit).exec()
 		const total = await Video.count({}).exec()
-		console.log(query)
 		const data = {items: query, totalPages: Math.ceil(total/pageOptions.limit), page: pageOptions.page}
 		const response = {
 			status: "success",
@@ -26,33 +25,54 @@ const all = async (req, res) => {
 
 const add = async (req, res) => {
 	try {
-		const video = Video.create({}).exec();
+		let video = new Video();
+		video = await video.save();
 		const response = {
 			status: "success",
 			data: {item: video},
-			message: ""
+			message: "Successfully, add video"
 		}
+		return res.json(response);
 	} catch(err) {
 		console.log(err)
 	}
 }
 
-const update = (req, res) => {
+const single = async (req, res) => {
+	try {
+		const video = await Video.findById(req.id).exec();
+		const response = {
+			status: "success",
+			data: {item: video},
+			message: ""
+		}
+		return res.json(response);
+	} catch(err) {
+		console.log(err)
+	}
+}
+
+
+const update = async (req, res) => {
   const set = {};
   for (let field of req.body) {
       set[field] = req.body[field];
   }
-  Video.findOneAndUpdate({_id: req.id}, {$set: set},
-                           {new: true}, function(err, video){
-      if(err){
-          console.log("Something wrong when updating data!");
-      }
-      res.json(video);
-  });
+	try {
+	  const video = await Video.findOneAndUpdate({_id: req.id}, {$set: set}, {new: true}).exec();
+		const response = {
+			status: "success",
+			data: {item: video},
+			message: ""
+		}
+		return res.json(response);
+	} catch(err) {
+		console.log(err)
+	}
 }
 
 // route middleware to validate :id
-router.param('id', function(req, res, next, id) {
+router.param('id', (req, res, next, id)=>{
     Video.findById(id, function (err, video) {
         if (err) {
             console.log(id + ' was not found');
@@ -68,6 +88,5 @@ router.param('id', function(req, res, next, id) {
 });
 router.get('/', all);
 router.get('/add', add);
-router.route("/:id").put(update);
-
+router.route("/:id").get(single).put(update);
 module.exports = router;
