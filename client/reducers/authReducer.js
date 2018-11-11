@@ -1,15 +1,13 @@
-import { authTypes } from 'actions/authActions';
+import { actionTypes } from 'actions/authActions';
+const { AUTHENTICATED, UNAUTHENTICATED } = actionTypes
 
 export default function(state={}, action) {
   switch(action.type) {
-    case authTypes.AUTHENTICATED:
+    case AUTHENTICATED:
       return { ...state, authenticated: true };
-    case authTypes.UNAUTHENTICATED:
+    case UNAUTHENTICATED:
       return { ...state, authenticated: false };
 		default:
 			return state;
-    //case authTypes.AUTHENTICATION_ERROR:
-      //return { ...state, error: action.payload };
   }
-  //return state;
 }

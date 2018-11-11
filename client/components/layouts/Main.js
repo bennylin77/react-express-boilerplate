@@ -12,7 +12,7 @@ class Main extends Component {
 				return (
 					<main>
 			        <Route exact path='/' component={RequireAuth(Home)}/>
-							<Route path='/video' component={Video}/>
+							<Route path='/videos' component={RequireAuth(Video)}/>
 							<Route path='/auth' component={NoRequireAuth(Auth)}/>
 					</main>);
 	}

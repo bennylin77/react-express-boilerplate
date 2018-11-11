@@ -2,24 +2,39 @@ const mongoose = require("mongoose");
 const Video = require("../schema/video");
 const router = require("express").Router();
 
-const all = (req, res) => {
-  Video.find( {}, 'id').sort({createdAt: -1}).exec(function (err, videos) {
-			console.log("checked")
-      if (err)
-          res.send(err);
-      else
-          res.json(videos);
-  });
+const all = async (req, res) => {
+	const pageOptions = {
+	    page: parseInt(req.query.page) || 1,
+	    limit: parseInt(req.query.limit) || 100
+	}
+	try {
+		const offset = (pageOptions.page-1)*pageOptions.limit;
+		const query = await Video.find({}).skip(offset).limit(pageOptions.limit).exec()
+		const total = await Video.count({}).exec()
+		console.log(query)
+		const data = {items: query, totalPages: Math.ceil(total/pageOptions.limit), page: pageOptions.page}
+		const response = {
+			status: "success",
+			data: data,
+			message: ""
+		}
+		return res.json(response);
+	} catch(err) {
+		console.log(err)
+	}
 }
 
-const add = (req, res) => {
-  const video = new Video();
-  video.save(function (err) {
-      if (err)
-          res.send(err);
-      else
-          res.json(video);
-  });
+const add = async (req, res) => {
+	try {
+		const video = Video.create({}).exec();
+		const response = {
+			status: "success",
+			data: {item: video},
+			message: ""
+		}
+	} catch(err) {
+		console.log(err)
+	}
 }
 
 const update = (req, res) => {
@@ -51,7 +66,7 @@ router.param('id', function(req, res, next, id) {
         }
     });
 });
-router.get('/all', all);
+router.get('/', all);
 router.get('/add', add);
 router.route("/:id").put(update);
 

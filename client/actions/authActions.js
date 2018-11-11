@@ -1,11 +1,11 @@
 const domain = process.env.DOMAIN;
 import { addNotification } from 'actions/notificationActions';
-export const authTypes = {
+export const actionTypes = {
 	AUTHENTICATED: 'AUTHENTICATED',
 	UNAUTHENTICATED: 'UNAUTHENTICATED',
 }
 
-export const signUp = ({ email, password, confirmPassword }, history) => {
+export function signUp({ email, password, confirmPassword }, history){
 	const data = {email: email, password: password, confirmPassword: confirmPassword}
   return (dispatch, getState) => {
 		let redirectPath = '/';
@@ -22,7 +22,7 @@ export const signUp = ({ email, password, confirmPassword }, history) => {
 											throw response;
 										localStorage.setItem('token', response.data.token);
 	 									localStorage.setItem('id', response.data.user.id);
-										dispatch({ type: authTypes.AUTHENTICATED })
+										dispatch({ type: actionTypes.AUTHENTICATED })
 								 })
 								 .then(()=>{
 
@@ -51,7 +51,7 @@ export function signIn({ email, password }, history){
 											throw response;
 										localStorage.setItem('token', response.data.token);
 	 									localStorage.setItem('id', response.data.user.id);
-										dispatch({ type: authTypes.AUTHENTICATED })
+										dispatch({ type: actionTypes.AUTHENTICATED })
 								 })
 								 .then(()=>{
 								 		history.push(redirectPath);
@@ -59,44 +59,10 @@ export function signIn({ email, password }, history){
 								 .catch(response => dispatch(addNotification({message: response.message})) )
 	};
 }
-/*
-export const signIn = ({ email, password }, history) => {
-	const data = {email: email, password: password}
-  return (dispatch, getState) => {
-		let redirectPath = '/';
-		return fetch(`${domain}/api/auth/signin`,
-									{ method: 'POST',
-										headers: {
-			                'Accept': 'application/json',
-			                'Content-Type': 'application/json'
-			              },
-										body: JSON.stringify(data)})
-								 .then(response => response.json())
-								 .then(response => {
-									  if(response.status!='success')
-											throw response;
-										localStorage.setItem('token', response.data.token);
-	 									localStorage.setItem('id', response.data.user.id);
-										dispatch({ type: authTypes.AUTHENTICATED })
-								 })
-								 .then(()=>{
-								 		history.push(redirectPath);
-								 })
-								 .catch(response => dispatch({
-										         					type: authTypes.AUTHENTICATION_ERROR,
-										         					payload: 'Invalid email or password'
-										       					}))
-	};
-}
-*/
 
-
-
-
-
-export const signOut = () => {
+export function signOut(){
   localStorage.clear();
   return {
-    type: authTypes.UNAUTHENTICATED
+    type: actionTypes.UNAUTHENTICATED
   };
 }

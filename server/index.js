@@ -8,7 +8,7 @@ const passport = require('passport');
 require('./passport');
 //controllers
 const authController = require("./controllers/authController");
-
+const videoController = require("./controllers/videoController");
 
 module.exports = {
   app: function () {
@@ -17,7 +17,7 @@ module.exports = {
     app.use(express.static(path.join(__dirname, "./public"))); // for serving static files (e.g. images)
     app.use(bodyParser.json());
     app.use(cookieParser());
-    //app.use("/api/articles", passport.authenticate('jwt', {session: false}), articleController);
+    app.use("/api/videos", passport.authenticate('jwt', {session: false}), videoController);
 		app.use('/api/auth', authController);
     return app;
   }
