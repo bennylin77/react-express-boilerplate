@@ -27,7 +27,8 @@ class List extends Component {
 								<div>
 									<ButtonGroup>
 										<Link to={`/${url}/${id}`} className="btn btn-outline-secondary" role="button">Detail</Link>
-						      </ButtonGroup>
+										<Button outline onClick={()=>this.props.onDeleteClick(id)} color="danger">Delete</Button>
+									</ButtonGroup>
 								</div>
 							</ListGroupItem>)}
 		);

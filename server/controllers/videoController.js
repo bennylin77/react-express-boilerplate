@@ -52,7 +52,6 @@ const single = async (req, res) => {
 	}
 }
 
-
 const update = async (req, res) => {
   const set = {};
   for (let field of req.body) {
@@ -64,6 +63,20 @@ const update = async (req, res) => {
 			status: "success",
 			data: {item: video},
 			message: ""
+		}
+		return res.json(response);
+	} catch(err) {
+		console.log(err)
+	}
+}
+
+const destroy = async (req, res) =>{
+	try {
+		const video = await Video.findOneAndRemove({_id: req.id}).exec();
+		const response = {
+			status: "success",
+			data: {},
+			message: `Successfully, remove video ${video.id}`
 		}
 		return res.json(response);
 	} catch(err) {
@@ -88,5 +101,5 @@ router.param('id', (req, res, next, id)=>{
 });
 router.get('/', all);
 router.get('/add', add);
-router.route("/:id").get(single).put(update);
+router.route("/:id").get(single).put(update).delete(destroy);
 module.exports = router;

@@ -5,6 +5,7 @@ export const actionTypes = {
 	RECEIVE_VIDEO_LIST: 'RECEIVE_VIDEO_LIST',
 	REQUEST_VIDEO: 'REQUEST_VIDEO',
 	RECEIVE_VIDEO: 'RECEIVE_VIDEO',
+	REMOVE_VIDEO: "RECEIVE_VIDEO"
 }
 
 /*============================== video =================================*/
@@ -27,6 +28,16 @@ function receiveVideo(id, item){
 		}
 	}
 }
+function removeVideo(id){
+	return {
+		type: actionTypes.REMOVE_VIDEO,
+		payload: {
+			id
+		}
+	}
+}
+
+
 function shouldFetchVideo(state, id){
 	const item = state.entities.videos[id];
 	if (!item)
@@ -63,6 +74,23 @@ export function addVideo(){
 					throw response;
 				Promise.all([
 					dispatch(receiveVideo(response.data.item.id, response.data.item)),
+					dispatch(addNotification({message: response.message}))
+				])
+			})
+			.catch( response => dispatch(addNotification({message: response.message})))
+  }
+}
+
+export function deleteVideo(id){
+	const token = localStorage.getItem('token');
+  return (dispatch, getState) => {
+    return fetch(`${domain}/api/videos/${id}`, {headers: {authorization: `bearer ${token}`}, method: 'DELETE'})
+      .then(response => response.json())
+      .then(response => {
+				if(response.status!='success')
+					throw response;
+				Promise.all([
+					dispatch(removeVideo(id)),
 					dispatch(addNotification({message: response.message}))
 				])
 			})

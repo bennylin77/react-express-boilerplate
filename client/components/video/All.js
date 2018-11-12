@@ -36,7 +36,12 @@ class All extends Component{
 			()=>this.props.history.push('/videos')
 		)
 	}
-
+	handleDelete = (id) => {
+		const { deleteVideo } = this.props;
+		deleteVideo(id).then(
+			()=>this.props.history.push('/videos')
+		)
+	}
   render() {
 		if (this.isNotFetched()) {
       return <h4><i>Loading</i></h4>
@@ -49,7 +54,7 @@ class All extends Component{
 						<Col><Button onClick={this.handleAdd} >Add New Video</Button></Col>
 					</Row>
 	        <Row className="mb-2">
-	          <Col><List url={"/videos"} videos={videos} currentPage={currentPage} pages={pages} /></Col>
+	          <Col><List url={"/videos"} videos={videos} currentPage={currentPage} pages={pages} onDeleteClick={this.handleDelete} /></Col>
 	        </Row>
 					<Row className="mb-2">
 	          <Col><Pagination url={"/videos"} currentPage={currentPage} totalPages={totalPages}/></Col>

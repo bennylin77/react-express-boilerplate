@@ -1,5 +1,5 @@
 import { actionTypes } from "actions/videoActions";
-const { REQUEST_VIDEO, RECEIVE_VIDEO, RECEIVE_VIDEO_LIST } = actionTypes
+const { REQUEST_VIDEO, RECEIVE_VIDEO, REMOVE_VIDEO, RECEIVE_VIDEO_LIST } = actionTypes
 
 export function videos(state = {}, action){
 	const { payload, type } = action;
@@ -7,6 +7,8 @@ export function videos(state = {}, action){
 		case REQUEST_VIDEO:
 		case RECEIVE_VIDEO:
 			return {...state, [payload.id]: video(state[payload.id], action) }
+		case REMOVE_VIDEO:
+			return state.filter(v=>v.id!==payload.id)
 		case RECEIVE_VIDEO_LIST:
 			let items = {}
 			for (let item of payload.items)
