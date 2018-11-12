@@ -5,11 +5,30 @@ export const actionTypes = {
 	RECEIVE_VIDEO_LIST: 'RECEIVE_VIDEO_LIST',
 	REQUEST_VIDEO: 'REQUEST_VIDEO',
 	RECEIVE_VIDEO: 'RECEIVE_VIDEO',
-	REMOVE_VIDEO: "RECEIVE_VIDEO"
+	REMOVE_VIDEO: "RECEIVE_VIDEO",
+	EDIT_VIDEO: "EDIT_VIDEO"
 }
 
 /*============================== video =================================*/
 
+export function fetchVideoIfNeeded(id){
+	return (dispatch, getState) => {
+		if (shouldFetchVideo(getState(), id))
+			return dispatch(fetchVideo(id))
+		else
+			return Promise.resolve()
+	}
+}
+
+export function editVideo(id){
+  return {
+    type: EDIT_ARTICLE,
+		payload:{
+    	collection: 'videos',
+    	id
+		}
+  }
+}
 
 function requestVideo(id){
 	return {
@@ -36,8 +55,6 @@ function removeVideo(id){
 		}
 	}
 }
-
-
 function shouldFetchVideo(state, id){
 	const item = state.entities.videos[id];
 	if (!item)
@@ -46,14 +63,6 @@ function shouldFetchVideo(state, id){
 		return false
 	else
 		return true
-}
-function fetchVideoIfNeeded(id){
-	return (dispatch, getState) => {
-		if (shouldFetchVideo(getState(), id))
-			return dispatch(fetchVideo(id))
-		else
-			return Promise.resolve()
-	}
 }
 function fetchVideo(id){
 	const token = localStorage.getItem('token');
@@ -84,13 +93,41 @@ export function addVideo(){
 export function deleteVideo(id){
 	const token = localStorage.getItem('token');
   return (dispatch, getState) => {
-    return fetch(`${domain}/api/videos/${id}`, {headers: {authorization: `bearer ${token}`}, method: 'DELETE'})
-      .then(response => response.json())
+    return fetch(`${domain}/api/videos/${id}`,
+						{ method: 'DELETE',
+							headers: {authorization: `bearer ${token}`}
+						})
+			.then(response => response.json())
       .then(response => {
 				if(response.status!='success')
 					throw response;
 				Promise.all([
 					dispatch(removeVideo(id)),
+					dispatch(addNotification({message: response.message}))
+				])
+			})
+			.catch( response => dispatch(addNotification({message: response.message})))
+  }
+}
+
+export function updateVideo(id, data){
+	const token = localStorage.getItem('token');
+  return (dispatch, getState) => {
+    return fetch(`${domain}/api/videos/${id}`,
+	           { method: 'PUT',
+	             headers: {
+	               accept: 'application/json, text/plain, */*',
+								 authorization: `bearer ${token}`,
+	               'Content-Type': 'application/json'
+	             },
+	             body: JSON.stringify(data)
+						 })
+      .then(response => response.json())
+			.then(response => {
+				if(response.status!='success')
+					throw response;
+				Promise.all([
+					dispatch(receiveVideo(response.data.item.id, response.data.item)),
 					dispatch(addNotification({message: response.message}))
 				])
 			})

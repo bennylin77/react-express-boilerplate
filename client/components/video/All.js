@@ -54,10 +54,10 @@ class All extends Component{
 						<Col><Button onClick={this.handleAdd} >Add New Video</Button></Col>
 					</Row>
 	        <Row className="mb-2">
-	          <Col><List url={"/videos"} videos={videos} currentPage={currentPage} pages={pages} onDeleteClick={this.handleDelete} /></Col>
+	          <Col><List path={"/videos"} videos={videos} currentPage={currentPage} pages={pages} onDeleteClick={this.handleDelete} /></Col>
 	        </Row>
 					<Row className="mb-2">
-	          <Col><Pagination url={"/videos"} currentPage={currentPage} totalPages={totalPages}/></Col>
+	          <Col><Pagination path={"/videos"} currentPage={currentPage} totalPages={totalPages}/></Col>
 	        </Row>
 				</Container>
   		</section>

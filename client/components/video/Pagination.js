@@ -12,14 +12,14 @@ class App extends Component {
 		return !currentPage || !totalPages;
 	}
 	render() {
-		const { url, currentPage, totalPages } = this.props
+		const { path, currentPage, totalPages } = this.props
     if (this.isNotFetched()) {
       return <h4><i>Loading</i></h4>
     }
 		const items = []
 		for(let i=1; i<=totalPages; i++){
 			items.push(<PaginationItem key={i} style={{display: "inline-block"}}>
-										<Link to={`${url}?page=${i}`} className="page-link">{i}</Link>
+										<Link to={`${path}?page=${i}`} className="page-link">{i}</Link>
 								 </PaginationItem>)
 
 		}

@@ -1,10 +1,14 @@
 import React from 'react';
 import All from 'containers/video/AllContainer.js';
-import { Route } from 'react-router-dom'
+import Show from 'components/video/Show.js';
+import { Switch, Route } from 'react-router-dom';
 
 function Entry(props) {
   return (
-    <Route exact path='/videos' component={All}/>
+		<Switch>
+    	<Route exact path='/videos' component={All}/>
+			<Route exact path='/videos/:id' component={Show}/>
+		</Switch>
   );
 }
 export default Entry;

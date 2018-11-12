@@ -16,7 +16,7 @@ class List extends Component {
 
 
 	render() {
-		const { url, videos, currentPage, pages } = this.props
+		const { path, videos, currentPage, pages } = this.props
     if (this.isNotFetched()) {
       return <h4><i>Loading</i></h4>
     }
@@ -26,7 +26,7 @@ class List extends Component {
 								<ListGroupItemHeading>{id} - {videos[id].url}</ListGroupItemHeading>
 								<div>
 									<ButtonGroup>
-										<Link to={`/${url}/${id}`} className="btn btn-outline-secondary" role="button">Detail</Link>
+										<Link to={`${path}/${id}`} className="btn btn-outline-secondary" role="button">Details</Link>
 										<Button outline onClick={()=>this.props.onDeleteClick(id)} color="danger">Delete</Button>
 									</ButtonGroup>
 								</div>
