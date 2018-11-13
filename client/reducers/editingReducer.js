@@ -4,11 +4,11 @@ const { EDIT_VIDEO } = actionTypes
 
 
 
-export function editing(state = {}, action) {
+export default function editing(state = {}, action) {
 	const {type, payload} = action;
   switch (action.type) {
     case EDIT_VIDEO:
-      return [...state, [payload.collection]: { id: payload.id }]
+      return {...state, [payload.collection]: { id: payload.id }}
     default:
       return state
   }

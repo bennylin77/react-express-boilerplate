@@ -3,40 +3,40 @@ import { connect } from 'react-redux';
 import { editVideo, updateVideo, fetchVideoIfNeeded } from 'actions/videoActions';
 import Form from 'components/video/Form';
 import { reduxForm } from 'redux-form';
+import { withRouter } from 'react-router-dom'
 
 //connect
 
 const mapStateToProps = (state) => {
-	const {entities: {videos}, editing: {videos: {id}} } = state;
-	const initialValues = {
-		title: videos[id].title,
-		url: videos[id].url,
+	const {entities: {videos}, editing } = state;
+	let title, url;
+	if(editing && editing.videos && editing.videos.id){
+		const id = editing.videos.id
+		title = videos[id].title
+		url = videos[id].url
 	}
+	const initialValues = {
+		title: title || "",
+		url: url || "",
+	}
+
   return { initialValues: initialValues };
 }
 const mapDispatchToProps = dispatch => ({
 	fetchVideoIfNeeded: id => dispatch(fetchVideoIfNeeded(id)),
-  updateVideo: data => dispatch(updateVideo(data)),
+  updateVideo: (id, data) => dispatch(updateVideo(id, data)),
 	editVideo: id => dispatch(editVideo(id))
 })
-/*
-let videoForm = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Form);
-
-export default reduxForm({
-  form: 'videoFrom'
-})(videoForm);
-*/
 
 let videoForm = reduxForm({
-  form: 'videoFrom'
-})(videoForm)
+  form: 'videoFrom',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true
+})(Form)
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(videoForm)
+)(videoForm))
 
 //export default videoForm

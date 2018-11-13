@@ -1,11 +1,11 @@
 .notifications {
-  top: 50px;
+	list-style: none;
+  top: 55px;
   position: fixed;
   right: 24px;
-  width: 240px;
 	z-index: 9999;
 }
-
+/*
 .notification {
   align-items: flex-start;
   border-radius: 4px;
@@ -37,3 +37,4 @@
   font: inherit;
   padding: 0;
 }
+*/

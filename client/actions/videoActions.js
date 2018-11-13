@@ -22,7 +22,7 @@ export function fetchVideoIfNeeded(id){
 
 export function editVideo(id){
   return {
-    type: EDIT_ARTICLE,
+    type: actionTypes.EDIT_VIDEO,
 		payload:{
     	collection: 'videos',
     	id
@@ -116,8 +116,7 @@ export function updateVideo(id, data){
     return fetch(`${domain}/api/videos/${id}`,
 	           { method: 'PUT',
 	             headers: {
-	               accept: 'application/json, text/plain, */*',
-								 authorization: `bearer ${token}`,
+								 'authorization': `bearer ${token}`,
 	               'Content-Type': 'application/json'
 	             },
 	             body: JSON.stringify(data)

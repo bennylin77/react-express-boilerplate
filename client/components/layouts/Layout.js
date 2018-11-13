@@ -9,9 +9,9 @@ const Layout = props => {
   return (
     <div>
       <Menu/>
+			<Notifications />
       <Main/>
       <Footer/>
-			<Notifications />
     </div>
   );
 }

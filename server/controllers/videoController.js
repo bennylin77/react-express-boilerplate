@@ -54,7 +54,7 @@ const single = async (req, res) => {
 
 const update = async (req, res) => {
   const set = {};
-  for (let field of req.body) {
+  for (let field in req.body) {
       set[field] = req.body[field];
   }
 	try {
@@ -62,7 +62,7 @@ const update = async (req, res) => {
 		const response = {
 			status: "success",
 			data: {item: video},
-			message: ""
+			message: `Successfully, update video ${video.id}`
 		}
 		return res.json(response);
 	} catch(err) {

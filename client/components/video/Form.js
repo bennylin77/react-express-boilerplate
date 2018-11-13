@@ -9,7 +9,7 @@ class VideoForm extends Component {
 		super(props)
 	}
 	componentDidMount = () => {
-		const { fetchVideoIfNeeded } = this.props
+		const { fetchVideoIfNeeded, editVideo } = this.props
 		const { id } = this.props.match.params
 		fetchVideoIfNeeded(id)
 			.then(editVideo(id))
