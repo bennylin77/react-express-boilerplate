@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { fetchVideoListIfNeeded, addVideo, deleteVideo } from 'actions/videoActions.js';
-import All from 'components/video/All.js';
+import All from 'components/video/All.jsx';
 
 
 //connect

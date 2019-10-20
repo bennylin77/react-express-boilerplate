@@ -7,9 +7,10 @@ import Pagination from './Pagination';
 const LIMIT = 10;
 
 class All extends Component{
-  constructor(props) {
-     super(props);
-  }
+	constructor(props) {
+     	super(props);
+	}
+  
 	componentDidMount = () => {
 		const { fetchVideoListIfNeeded, location: {search: search} } = this.props;
 		const params = new URLSearchParams(search);
