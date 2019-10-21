@@ -4,11 +4,11 @@ import Show from 'components/video/Show.js';
 import { Switch, Route } from 'react-router-dom';
 
 function Entry(props) {
-  return (
+	return (
 		<Switch>
-    	<Route exact path='/videos' component={All}/>
-			<Route exact path='/videos/:id' component={Show}/>
+    	<Route exact path='/videos' component={ All } />
+			<Route exact path='/videos/:id' component={ Show } />
 		</Switch>
-  );
+	);
 }
 export default Entry;

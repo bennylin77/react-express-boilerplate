@@ -3,31 +3,29 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 export default function (ComposedComponent) {
-  class NoRequireAuth extends Component {
+	class NoRequireAuth extends Component {
     componentWillMount = () => {
-      if (this.props.authenticated) {
-        this.props.history.push('/');
-      }
+    	if (this.props.authenticated) {
+    		this.props.history.push('/');
+    	}
     }
 
-    componentWillUpdate = nextProps => {
-      if (nextProps.authenticated) {
-        this.props.history.push('/');
-      }
+    componentWillUpdate = (nextProps) => {
+    	if (nextProps.authenticated) {
+    		this.props.history.push('/');
+    	}
     }
 
     PropTypes = {
-      router: PropTypes.object,
+    	router: PropTypes.object,
     }
 
     render() {
-      return <ComposedComponent {...this.props} />;
+    	return <ComposedComponent { ...this.props } />;
     }
-  }
+	}
 
-  const mapStateToProps = state => {
-    return { authenticated: state.auth.authenticated };
-  }
+	const mapStateToProps = (state) => ({ authenticated: state.auth.authenticated });
 
-  return connect(mapStateToProps)(NoRequireAuth);
+	return connect(mapStateToProps)(NoRequireAuth);
 }

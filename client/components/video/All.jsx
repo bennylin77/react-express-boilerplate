@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'reactstrap';
-import List from './List';
+import List from './List.jsx';
 import Pagination from './Pagination';
 
 const LIMIT = 10;
@@ -50,7 +50,7 @@ class All extends Component{
 		const {videos, videoList: { pages: pages, currentPage: currentPage, totalPages: totalPages}} = this.props
     return (
 			<section>
-				<Container className="py-5">
+			<Container className="py-5">
 					<Row className="mb-2">
 						<Col><Button onClick={this.handleAdd} >Add New Video</Button></Col>
 					</Row>
@@ -60,7 +60,7 @@ class All extends Component{
 					<Row className="mb-2">
 	          <Col><Pagination path={"/videos"} currentPage={currentPage} totalPages={totalPages}/></Col>
 	        </Row>
-				</Container>
+			</Container>
   		</section>
     );
   }

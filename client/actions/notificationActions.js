@@ -1,32 +1,32 @@
 export const actionTypes = {
 	ADD_NOTIFICATION: 'ADD_NOTIFICATION',
 	REMOVE_NOTIFICATION: 'REMOVE_NOTIFICATION',
-}
+};
 
 
 let id = 0;
 const defaultOptions = {
-  color: "primary"
+	color: 'primary',
 };
 
 function createNotification(options) {
-  return {
-    ...defaultOptions,
-    ...options,
-    id: id++
-  }
+	return {
+		...defaultOptions,
+		...options,
+		id: id++,
+	};
 }
 
 export function addNotification(options = {}) {
-  return {
+	return {
 		type: actionTypes.ADD_NOTIFICATION,
-    payload: createNotification(options)
-  };
+		payload: createNotification(options),
+	};
 }
 
 export function removeNotification(id) {
-  return {
+	return {
 		type: actionTypes.REMOVE_NOTIFICATION,
-    payload: {id}
-  };
+		payload: { id },
+	};
 }

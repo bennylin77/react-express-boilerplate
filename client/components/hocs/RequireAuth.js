@@ -3,31 +3,29 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 export default function (ComposedComponent) {
-  class RequireAuth extends Component {
+	class RequireAuth extends Component {
     componentWillMount = () => {
-      if (!this.props.authenticated) {
-        this.props.history.push('/auth/signin');
-      }
+    	if (!this.props.authenticated) {
+    		this.props.history.push('/auth/signin');
+    	}
     }
 
-    componentWillUpdate = nextProps => {
-      if (!nextProps.authenticated) {
-        this.props.history.push('/auth/signin');
-      }
+    componentWillUpdate = (nextProps) => {
+    	if (!nextProps.authenticated) {
+    		this.props.history.push('/auth/signin');
+    	}
     }
 
     PropTypes = {
-      router: PropTypes.object,
+    	router: PropTypes.object,
     }
 
     render() {
-      return <ComposedComponent {...this.props} />;
+    	return <ComposedComponent { ...this.props } />;
     }
-  }
+	}
 
-  const mapStateToProps = state => {
-    return { authenticated: state.auth.authenticated };
-  }
+	const mapStateToProps = (state) => ({ authenticated: state.auth.authenticated });
 
-  return connect(mapStateToProps)(RequireAuth);
+	return connect(mapStateToProps)(RequireAuth);
 }

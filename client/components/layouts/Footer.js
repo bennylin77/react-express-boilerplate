@@ -4,7 +4,7 @@ import './styles/Footer.css';
 
 class Footer extends Component {
 	render() {
-				return (<footer></footer>);
+		return (<footer />);
 	}
 }
 export default Footer;

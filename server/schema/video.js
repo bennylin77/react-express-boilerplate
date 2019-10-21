@@ -1,13 +1,14 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+
 const videoSchema = mongoose.Schema({
-  title: String,
-  url: String,
+	title: String,
+	url: String,
 	width: Number,
-	height: Number
+	height: Number,
 }, { timestamps: true });
 videoSchema.set('toJSON', {
-  virtuals: true,
-  versionKey: false,
-  transform: function (doc, ret) { delete ret._id  }
+	virtuals: true,
+	versionKey: false,
+	transform(doc, ret) { delete ret._id; },
 });
-module.exports = mongoose.model("Video", videoSchema);
+module.exports = mongoose.model('Video', videoSchema);

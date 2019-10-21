@@ -1,32 +1,32 @@
-import { actionTypes } from "actions/videoActions";
-const { REQUEST_VIDEO, RECEIVE_VIDEO, REMOVE_VIDEO, RECEIVE_VIDEO_LIST } = actionTypes
+import { actionTypes } from 'actions/videoActions';
 
-export function videos(state = {}, action){
+const { REQUEST_VIDEO, RECEIVE_VIDEO, REMOVE_VIDEO, RECEIVE_VIDEO_LIST } = actionTypes;
+
+export function videos(state = {}, action) {
 	const { payload, type } = action;
 	switch (type) {
-		case REQUEST_VIDEO:
-		case RECEIVE_VIDEO:
-			return {...state, [payload.id]: video(state[payload.id], action) }
-		case REMOVE_VIDEO:
-			return state.filter(v=>v.id!==payload.id)
-		case RECEIVE_VIDEO_LIST:
-			let items = {}
-			for (let item of payload.items)
-				items = { ...items, [item.id]: {...state, isFetching: false, lastUpdated: Date.now(), ...item } }
-			return { ...state, ...items }
-		default:
-			return state
+	case REQUEST_VIDEO:
+	case RECEIVE_VIDEO:
+		return { ...state, [payload.id]: video(state[payload.id], action) };
+	case REMOVE_VIDEO:
+		return state.filter((v) => v.id !== payload.id);
+	case RECEIVE_VIDEO_LIST:
+		let items = {};
+		for (const item of payload.items) items = { ...items, [item.id]: { ...state, isFetching: false, lastUpdated: Date.now(), ...item } };
+		return { ...state, ...items };
+	default:
+		return state;
 	}
 }
 
-function video(state = {isFetching: false}, action){
+function video(state = { isFetching: false }, action) {
 	const { payload, type } = action;
 	switch (type) {
-		case REQUEST_VIDEO:
-			return {...state, isFetching: true}
-		case RECEIVE_VIDEO:
-			return {...state, isFetching: false, lastUpdated: Date.now(), ...payload.item }
-		default:
-			return state
+	case REQUEST_VIDEO:
+		return { ...state, isFetching: true };
+	case RECEIVE_VIDEO:
+		return { ...state, isFetching: false, lastUpdated: Date.now(), ...payload.item };
+	default:
+		return state;
 	}
 }
